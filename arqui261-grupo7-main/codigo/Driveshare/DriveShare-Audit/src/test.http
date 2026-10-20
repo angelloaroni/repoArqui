@@ -1,0 +1,118 @@
+### ==========================================
+### DriveShare Audit Sidecar
+### ==========================================
+
+@hostname = localhost
+@port = 4000
+@host = http://{{hostname}}:{{port}}
+
+### ==========================================
+### 1. Health Check
+### ==========================================
+
+GET {{host}}
+
+###
+
+### ==========================================
+### 2. Registrar Evento LOGIN
+### ==========================================
+
+POST {{host}}/audit
+Content-Type: application/json
+
+{
+  "id_user": 1,
+  "email": "maxtin478@gmail.com",
+  "action": "LOGIN",
+  "http_method": "POST",
+  "endpoint": "/api/login",
+  "status_code": 200,
+  "description": "Inicio de sesión exitoso.",
+  "ip_address": "172.18.0.1",
+  "user_agent": "REST Client"
+}
+
+###
+
+### ==========================================
+### 3. Registrar Evento REGISTER
+### ==========================================
+
+POST {{host}}/audit
+Content-Type: application/json
+
+{
+  "id_user": 1,
+  "email": "maxtin478@gmail.com",
+  "action": "REGISTER",
+  "http_method": "POST",
+  "endpoint": "/api/registrar",
+  "status_code": 201,
+  "description": "Usuario registrado correctamente.",
+  "ip_address": "172.18.0.1",
+  "user_agent": "REST Client"
+}
+
+###
+
+### ==========================================
+### 4. Registrar Evento VERIFY_ACCOUNT
+### ==========================================
+
+POST {{host}}/audit
+Content-Type: application/json
+
+{
+  "id_user": 1,
+  "email": "maxtin478@gmail.com",
+  "action": "VERIFY_ACCOUNT",
+  "http_method": "POST",
+  "endpoint": "/api/verificar-cuenta",
+  "status_code": 200,
+  "description": "Cuenta verificada correctamente.",
+  "ip_address": "172.18.0.1",
+  "user_agent": "REST Client"
+}
+
+###
+
+### ==========================================
+### 5. Registrar Evento UPDATE_PROFILE
+### ==========================================
+
+POST {{host}}/audit
+Content-Type: application/json
+
+{
+  "id_user": 1,
+  "email": "maxtin478@gmail.com",
+  "action": "UPDATE_PROFILE",
+  "http_method": "PUT",
+  "endpoint": "/api/usuario",
+  "status_code": 200,
+  "description": "Perfil actualizado correctamente.",
+  "ip_address": "172.18.0.1",
+  "user_agent": "REST Client"
+}
+
+###
+
+### ==========================================
+### 6. Registrar Evento CHANGE_PASSWORD
+### ==========================================
+
+POST {{host}}/audit
+Content-Type: application/json
+
+{
+  "id_user": 1,
+  "email": "maxtin478@gmail.com",
+  "action": "CHANGE_PASSWORD",
+  "http_method": "PUT",
+  "endpoint": "/api/password",
+  "status_code": 200,
+  "description": "Contraseña modificada correctamente.",
+  "ip_address": "172.18.0.1",
+  "user_agent": "REST Client"
+}

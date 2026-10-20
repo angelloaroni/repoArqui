@@ -1,0 +1,23 @@
+.users-page{
+
+    display:flex;
+
+    background:#f4f6f9;
+
+    min-height:calc(100vh - 70px);
+
+}
+
+.users-page main{
+
+    flex:1;
+
+    padding:35px;
+
+}
+
+.users-page h1{
+
+    margin-bottom:10px;
+
+}

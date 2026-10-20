@@ -1,0 +1,66 @@
+.publish-vehicle {
+  padding: 40px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.publish-card {
+  width: 100%;
+  max-width: 800px;
+
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 4px 15px
+    rgba(0,0,0,.08);
+}
+
+.publish-card h1 {
+  margin-bottom: 30px;
+}
+
+.publish-card form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+.publish-card input,
+.publish-card textarea {
+  padding: 12px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 10px;
+
+  font-size: 14px;
+}
+
+.publish-card textarea {
+  resize: vertical;
+
+  min-height: 120px;
+}
+
+.publish-card button {
+  border: none;
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  background: #22c55e;
+
+  color: white;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}

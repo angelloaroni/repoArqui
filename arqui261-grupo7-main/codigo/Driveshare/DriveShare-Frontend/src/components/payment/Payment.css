@@ -1,0 +1,146 @@
+/* src/components/payment/Payment.css */
+
+.payment {
+  padding: 40px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.payment-card {
+  width: 100%;
+  max-width: 600px;
+
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 4px 15px
+    rgba(
+      0,
+      0,
+      0,
+      0.08
+    );
+}
+
+.payment-card h1 {
+  margin-bottom: 15px;
+}
+
+.payment-card p {
+  margin-bottom: 25px;
+
+  color: #64748b;
+}
+
+.payment-option {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 15px;
+
+  padding: 15px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+.continue-btn {
+  width: 100%;
+
+  margin-top: 20px;
+
+  border: none;
+
+  background: #22c55e;
+
+  color: white;
+
+  padding: 14px;
+
+  border-radius: 10px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.continue-btn:hover {
+  background: #16a34a;
+}
+
+.reservation-summary {
+  background: #f8fafc;
+
+  padding: 20px;
+
+  border-radius: 12px;
+
+  margin-bottom: 25px;
+}
+
+.reservation-summary h3 {
+  margin-bottom: 15px;
+}
+
+.reservation-summary p {
+  margin-bottom: 8px;
+}
+
+.payment-method {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  width: 100%;
+}
+
+.payment-logo {
+  width: 60px;
+
+  height: 60px;
+
+  object-fit: contain;
+}
+
+.payment-image {
+  width: 120px;
+
+  height: auto;
+
+  object-fit: contain;
+}
+
+.payment-option {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 15px;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 12px;
+
+  margin-bottom: 15px;
+
+  cursor: pointer;
+}
+
+.payment-option:hover {
+  background: #f8fafc;
+}

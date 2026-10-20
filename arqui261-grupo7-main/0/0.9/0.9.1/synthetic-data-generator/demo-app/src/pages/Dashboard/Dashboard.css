@@ -1,0 +1,55 @@
+.dashboard{
+
+    display:flex;
+
+    background:#f4f6f9;
+
+    min-height:calc(100vh - 70px);
+
+}
+
+.dashboard main{
+
+    flex:1;
+
+    padding:35px;
+
+}
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+
+    margin-top:30px;
+
+}
+
+.dashboard-actions{
+
+    margin-top:40px;
+
+}
+
+.view-users{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:14px 24px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+}
+
+.view-users:hover{
+
+    background:#1d4ed8;
+
+}

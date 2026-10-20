@@ -1,0 +1,117 @@
+.yape-payment {
+  padding: 40px;
+
+  display: flex;
+
+  justify-content: center;
+}
+
+.yape-payment-card {
+  width: 100%;
+
+  max-width: 750px;
+
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 4px 15px
+    rgba(
+      0,
+      0,
+      0,
+      0.08
+    );
+}
+
+.payment-logo {
+  width: 100px;
+
+  display: block;
+
+  margin:
+    0 auto 20px;
+}
+
+.yape-payment-card h1 {
+  text-align: center;
+
+  margin-bottom: 25px;
+}
+
+.payment-summary {
+  background: #f8fafc;
+
+  padding: 20px;
+
+  border-radius: 12px;
+
+  margin-bottom: 25px;
+}
+
+.payment-summary h3 {
+  margin-bottom: 15px;
+}
+
+.payment-summary p {
+  margin-bottom: 8px;
+}
+
+.qr-section {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+}
+
+.qr-image {
+  width: 250px;
+
+  height: 250px;
+
+  object-fit: contain;
+
+  margin-bottom: 20px;
+}
+
+.timer {
+  margin-top: 15px;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  color: #7c3aed;
+}
+
+.confirm-btn {
+  width: 100%;
+
+  margin-top: 30px;
+
+  border: none;
+
+  background: #7c3aed;
+
+  color: white;
+
+  padding: 14px;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.confirm-btn:hover {
+  background: #6d28d9;
+}

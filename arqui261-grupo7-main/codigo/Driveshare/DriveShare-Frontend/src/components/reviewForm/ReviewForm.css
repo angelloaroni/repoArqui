@@ -1,0 +1,98 @@
+.review-modal {
+  position: fixed;
+
+  inset: 0;
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      0.5
+    );
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  z-index: 999;
+}
+
+.review-form-card {
+  background: white;
+
+  width: 100%;
+  max-width: 500px;
+
+  padding: 25px;
+
+  border-radius: 15px;
+}
+
+.review-form-card h2 {
+  margin-bottom: 20px;
+}
+
+.review-form-card form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.review-form-card select,
+.review-form-card textarea {
+  padding: 10px;
+
+  border:
+    1px solid #cbd5e1;
+
+  border-radius: 8px;
+}
+
+.review-form-card textarea {
+  min-height: 120px;
+
+  resize: vertical;
+}
+
+.review-buttons {
+  display: flex;
+
+  gap: 10px;
+}
+
+.save-review-btn {
+  flex: 1;
+
+  border: none;
+
+  background: #22c55e;
+
+  color: white;
+
+  padding: 10px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.cancel-review-btn {
+  flex: 1;
+
+  border: none;
+
+  background: #ef4444;
+
+  color: white;
+
+  padding: 10px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}

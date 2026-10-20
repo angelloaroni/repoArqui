@@ -1,0 +1,70 @@
+### DriveShare — Módulo 3 Reservas (ReservationService)
+### Base: http://localhost:3000/api/reservations
+### Requiere: Authorization: Bearer {{token}}
+
+@baseUrl = http://localhost:3000/api/reservations
+@token = REEMPLAZAR_CON_JWT
+
+### Crear reserva
+POST {{baseUrl}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "vehicle_id": "VEH-001",
+  "owner_id": "USR-002",
+  "vehicle_name": "Toyota Corolla",
+  "price_per_day": 120,
+  "start_date": "2026-08-10",
+  "end_date": "2026-08-14",
+  "pickup_location": "Miraflores",
+  "return_location": "Miraflores"
+}
+
+### Historial del arrendatario
+GET {{baseUrl}}/user
+Authorization: Bearer {{token}}
+
+### Reservas del propietario
+GET {{baseUrl}}/owner
+Authorization: Bearer {{token}}
+
+### Disponibilidad
+GET {{baseUrl}}/availability/VEH-001?start=2026-08-10&end=2026-08-14
+Authorization: Bearer {{token}}
+
+### Detalle
+GET {{baseUrl}}/1
+Authorization: Bearer {{token}}
+
+### Modificar fechas
+PUT {{baseUrl}}/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "start_date": "2026-08-11",
+  "end_date": "2026-08-15",
+  "pickup_location": "San Isidro",
+  "return_location": "Miraflores"
+}
+
+### Confirmar (tras pago)
+PUT {{baseUrl}}/1/confirm
+Authorization: Bearer {{token}}
+
+### Cancelar
+PUT {{baseUrl}}/1/cancel
+Authorization: Bearer {{token}}
+
+### Aceptar (propietario)
+PUT {{baseUrl}}/1/accept
+Authorization: Bearer {{token}}
+
+### Rechazar (propietario)
+PUT {{baseUrl}}/1/reject
+Authorization: Bearer {{token}}
+
+### Cerrar / devolución
+PUT {{baseUrl}}/1/close
+Authorization: Bearer {{token}}

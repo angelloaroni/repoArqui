@@ -1,0 +1,21 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+DROP TABLE IF EXISTS audit_log;
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+    id_user SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL,
+    lastname VARCHAR(100) NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE audit_log (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    event VARCHAR(100) NOT NULL,
+    detail JSONB,
+    created_at TIMESTAMP DEFAULT NOW()
+);

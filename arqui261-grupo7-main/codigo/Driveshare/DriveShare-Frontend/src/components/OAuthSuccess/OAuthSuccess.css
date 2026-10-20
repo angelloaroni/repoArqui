@@ -1,0 +1,50 @@
+/* src/components/OAuthSuccess/OAuthSuccess.css */
+
+.oauth-loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f8f9fa; /* Fondo gris claro limpio */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333333;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* El Spinner o Cargador Animado */
+.oauth-loading-container .spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #e0e0e0;
+  border-top: 5px solid #2563eb; /* Color azul moderno para DriveShare */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 24px;
+}
+
+.oauth-loading-container h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  text-align: center;
+}
+
+.oauth-loading-container p {
+  font-size: 1rem;
+  color: #666666;
+  margin: 0;
+  text-align: center;
+}
+
+/* Animación de rotación */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

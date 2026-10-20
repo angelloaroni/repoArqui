@@ -1,0 +1,120 @@
+/* src/components/Verification/Verification.css */
+
+.verification-section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.verification-card {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, .96);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 45px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, .25);
+  transition: transform 0.25s ease;
+}
+
+.verification-card:hover {
+  transform: translateY(-3px);
+}
+
+.verification-card h1 {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.verification-card p {
+  text-align: center;
+  color: #64748b;
+  font-size: 16px;
+  margin-bottom: 35px;
+  line-height: 1.5;
+}
+
+.verification-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.verification-card .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.verification-card .input-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.verification-card .input-group input {
+  padding: 15px 18px;
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  font-size: 15px;
+  outline: none;
+  transition: .25s;
+}
+
+.verification-card .input-group input:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, .15);
+}
+
+/* Estilo estilizado para la casilla del código monoespaciado */
+.input-code {
+  text-align: center;
+  font-family: monospace;
+  font-size: 24px !important;
+  letter-spacing: 8px;
+  color: #16a34a;
+  font-weight: 700;
+}
+
+.btn-verification {
+  border: none;
+  padding: 15px;
+  border-radius: 14px;
+  background: #22c55e;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.btn-verification:hover {
+  background: #16a34a;
+  transform: translateY(-2px);
+}
+
+.btn-verification:disabled {
+  background: #cbd5e1;
+  color: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.error-alert {
+  background-color: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #ef4444;
+  padding: 12px 15px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}

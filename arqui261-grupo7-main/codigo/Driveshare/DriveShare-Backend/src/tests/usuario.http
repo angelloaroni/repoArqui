@@ -1,0 +1,124 @@
+### Configuración de Variables Globales de DriveShare (.env)
+@hostname = localhost
+@port = 3000
+@host = http://{{hostname}}:{{port}}/api
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxLCJlbWFpbCI6Im1heHRpbjQ3OEBnbWFpbC5jb20iLCJuYW1lIjoiQWlkZW4iLCJsYXN0bmFtZSI6IlJhZG8iLCJyb2xlIjoiYXJyZW5kYXRhcmlvIiwiaWF0IjoxNzgzMjg2Mjk5LCJleHAiOjE3ODMzNzI2OTl9.RSNJyipk4jqy7kunW7lBiKQYUzFD5eswhBct0aoAONE
+
+### 1. Registrar un nuevo usuario (Formulario Tradicional)
+# Al disparar este POST, el usuario se creará en estado 'pending_verification'.
+# Ve a la consola/terminal de tu backend y copia el código de activación de 6 dígitos generado.
+POST {{host}}/registrar
+Content-Type: application/json
+
+{
+  "email": "maxtin478@gmail.com",
+  "name": "Aiden",
+  "lastname": "Rado",
+  "password": "AidenNuevo123",
+  "phone": "969750401",
+  "gender": "male",
+  "birth_date": "2000-01-01"
+}
+
+### 1.5. Verificar Cuenta (¡NUEVO PASO OBLIGATORIO!)
+# TIP: Reemplaza "654321" con el código de activación impreso en la terminal de tu backend.
+# Si la verificación es exitosa, te devolverá el token. Cópialo y pégalo arriba en @authToken.
+POST {{host}}/verificar-cuenta
+Content-Type: application/json
+
+{
+  "email": "maxtin478@gmail.com",
+  "codigo": "630615"
+}
+
+### 2. Login de Usuario
+# NOTA: Si intentas loguearte sin haber realizado el paso 1.5, el sistema te denegará el acceso.
+# TIP: Copia la propiedad 'token' del JSON de respuesta y pégala arriba en @authToken
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "email": "maxtin4@gmail.com",
+  "password": "AidenNuevo123"
+}
+
+### 3. Solicitar Recuperación de Contraseña (Olvido de Clave)
+# Si usas 'maxtin478@gmail.com' disparará la API real de Resend. Mira tu consola para obtener el código.
+POST {{host}}/recuperar-password
+Content-Type: application/json
+
+{
+  "email": "maxtin4@gmail.com"
+}
+
+### 4. Restablecer Contraseña (Desde el formulario de recuperación)
+# TIP: Reemplaza "123456" con el código de recuperación que apareció en la terminal de tu backend.
+POST {{host}}/reset-password
+Content-Type: application/json
+
+{
+  "email": "maxtin4@gmail.com",
+  "codigo": "258298",
+  "newPassword": "NuevaClaveRecuperada123"
+}
+
+### 5. Iniciar Autenticación con Google OAuth
+# Haz Ctrl + Click en esta URL o cópiala en tu navegador para levantar el login interactivo de Google
+GET {{host}}/auth/google
+
+
+// ==========================================================
+// 🛡️ ENDPOINTS PROTEGIDOS (Requieren colocar el @authToken arriba)
+// ==========================================================
+
+### 6. Obtener Lista Completa de Usuarios (findAll)
+GET {{host}}/
+Authorization: Bearer {{authToken}}
+
+### 7. Buscar un Usuario por su ID (findOne)
+# Cambia el '1' por el id_user real generado en tu base de datos de Postgres
+GET {{host}}/1
+Authorization: Bearer {{authToken}}
+
+### 8. Actualizar Perfil / Datos del Usuario (update)
+# Modifica la documentación requerida por DriveShare usando las variables reales del modelo
+PUT {{host}}/
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "id_user": 1,
+  "name": "Aiden",
+  "lastname": "Rado",
+  "phone": "999888777",
+  "gender": "male",
+  "nationality": "Peruana",
+  "document_id": "76543210",
+  "driver_license": "Q11223344",
+  "license_expiration": "2030-12-31"
+}
+
+### 9. Cambiar Contraseña (Flujo de Seguridad Interno / Logueado)
+# Cambia el '1' de la URL por el ID real de tu usuario logueado
+PUT {{host}}/1/password
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "passwordActual": "NuevaClaveRecuperada123",
+  "passwordNueva": "AidenCambio123"
+}
+
+### 10. Modificar el Estado del Usuario (cambiarEstado)
+# Actualiza el atributo 'status' de tu tabla USER ('active', 'suspended', 'pending_verification')
+PUT {{host}}/1/estado
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "estado": "active"
+}
+
+### 11. Eliminar / Dar de baja un Usuario por ID (remove)
+DELETE {{host}}/1
+Authorization: Bearer {{authToken}}

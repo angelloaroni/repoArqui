@@ -1,0 +1,217 @@
+/* src/components/Onboarding/Onboarding.css */
+
+.onboarding-container {
+  display: flex;
+  min-height: calc(100vh - 140px); /* Ajusta dinámicamente el tamaño restando el Header/Navbar y Footer */
+  background-color: #f8fafc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Lado Izquierdo (Mensaje de confianza/seguridad) */
+.onboarding-left {
+  display: none; /* Se oculta de forma fluida en móviles y tablets verticales */
+  flex: 1;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(22, 163, 74, 0.2)),
+              url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=1000&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 60px;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .onboarding-left {
+    display: flex;
+  }
+}
+
+.onboarding-left .left-content h2 {
+  font-size: 2.8rem;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.onboarding-left .left-content p {
+  font-size: 1.2rem;
+  color: #e2e8f0;
+  line-height: 1.5;
+}
+
+/* Lado Derecho (Formulario Legal de Onboarding) */
+.onboarding-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+}
+
+.onboarding-card {
+  width: 100%;
+  max-width: 550px; /* Un poco más ancho que el registro para balancear las filas dobles */
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  border: 1px solid #f1f5f9;
+}
+
+.onboarding-brand-logo {
+  height: 42px;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.onboarding-card h1 {
+  text-align: center;
+  color: #0f172a;
+  margin-bottom: 8px;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.onboarding-subtitle {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 30px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Alertas y Mensajes del Servidor */
+.onboarding-error-box {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.onboarding-info-box {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-top: 5px;
+  text-align: left;
+}
+
+/* Formulario y Filas Dinámicas */
+.onboarding-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.onboarding-row {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.onboarding-row .onboarding-group {
+  flex: 1;
+}
+
+.onboarding-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.onboarding-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* Inputs de Texto, Selects y Fechas */
+.onboarding-group input:not([type="checkbox"]),
+.onboarding-group .onboarding-select {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.95rem;
+  background-color: white;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+  height: 47px; /* Forzamos simetría simétrica en todos los controles */
+}
+
+.onboarding-group input:focus,
+.onboarding-group .onboarding-select:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+/* Validación del texto de error de edad */
+.onboarding-error-text {
+  font-size: 0.8rem;
+  color: #ef4444;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* Botón de envío */
+.onboarding-btn-submit {
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #22c55e;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 8px;
+}
+
+.onboarding-btn-submit:hover:not(:disabled) {
+  background: #16a34a;
+}
+
+.onboarding-btn-submit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.onboarding-btn-submit:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Adaptación Responsiva para Pantallas Medianas y Pequeñas */
+@media (max-width: 640px) {
+  .onboarding-row {
+    flex-direction: column;
+    gap: 18px;
+  }
+  
+  .onboarding-card {
+    padding: 25px 20px;
+    box-shadow: none;
+    border: none;
+  }
+  
+  .onboarding-right {
+    padding: 10px;
+  }
+}

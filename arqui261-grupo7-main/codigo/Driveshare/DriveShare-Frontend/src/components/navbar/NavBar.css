@@ -1,0 +1,118 @@
+/* src/components/navbar/Navbar.css */
+
+.navbar {
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 30px;
+
+  background: #0f172a;
+
+  color: white;
+
+  border-top: 1px solid rgba(255,255,255,.05);
+}
+
+.menu-button {
+  border: none;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 24px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.menu-button:hover {
+  color: #22c55e;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+
+  gap: 30px;
+
+  flex: 1;
+
+  margin-left: 25px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+
+  color: #e2e8f0;
+
+  font-weight: 500;
+
+  transition: 0.2s;
+
+  position: relative;
+}
+
+.navbar-links a:hover {
+  color: #22c55e;
+}
+
+.navbar-links a::after {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  bottom: -6px;
+
+  width: 0;
+  height: 2px;
+
+  background: #22c55e;
+
+  transition: width 0.2s ease;
+}
+
+.navbar-links a:hover::after {
+  width: 100%;
+}
+
+.navbar-user {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.navbar-user span {
+  color: #cbd5e1;
+
+  font-weight: 500;
+}
+
+.logout-btn {
+  border: none;
+
+  background: #ef4444;
+
+  color: white;
+
+  padding: 8px 12px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+  transition: 0.2s;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}

@@ -1,0 +1,55 @@
+### Microservicio de Pagos - Pruebas rápidas (usar extensión REST Client de VS Code)
+@base = http://localhost:3004
+@auth = Bearer token-de-prueba
+
+### RF30 - Cobrar una reserva (encola el cobro)
+POST {{base}}/pagos/cobrar
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "idReserva": 1,
+  "idArrendatario": 10,
+  "idArrendador": 20,
+  "monto": 150.00,
+  "moneda": "PEN",
+  "token": "tok_visa",
+  "email": "arrendatario@driveshare.pe",
+  "idempotencyKey": "reserva-1-cobro-001"
+}
+
+### Cobro directo (sincrónico, sin cola) - devuelve la transacción creada
+POST {{base}}/pagos/cobrar-directo
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "idReserva": 2,
+  "idArrendatario": 10,
+  "idArrendador": 20,
+  "monto": 200.00,
+  "token": "tok_visa",
+  "idempotencyKey": "reserva-2-cobro-001"
+}
+
+### RF34 - Historial de transacciones del usuario 10
+GET {{base}}/pagos/historial?idUsuario=10
+Authorization: {{auth}}
+
+### RF32 - Liberar fondos al arrendador (reemplaza el id por uno real del historial)
+POST {{base}}/pagos/PON_AQUI_EL_ID/liberar
+Authorization: {{auth}}
+
+### RF33 - Reembolsar (reemplaza el id)
+POST {{base}}/reembolsos/PON_AQUI_EL_ID
+Authorization: {{auth}}
+Content-Type: application/json
+
+{ "motivo": "Cancelación dentro del plazo" }
+
+### RF38 - Guardar método de pago
+POST {{base}}/metodos-pago
+Authorization: {{auth}}
+Content-Type: application/json
+
+{ "idUsuario": 10, "token": "tok_visa" }

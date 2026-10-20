@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DriveShare - Demo Parametrización</title>
+</head>
+<body>
+
+<h1>DriveShare - Demo Parametrización</h1>
+
+<p>
+    Versión de clave activa:
+    <strong id="version">Cargando...</strong>
+</p>
+
+<button onclick="loadConfig()">
+    Actualizar
+</button>
+
+<script>
+
+async function loadConfig() {
+
+    const response =
+        await fetch("/config");
+
+    const data =
+        await response.json();
+
+    document.getElementById("version")
+        .innerText =
+        data.activeKeyVersion;
+}
+
+loadConfig();
+
+</script>
+
+</body>
+</html>

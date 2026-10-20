@@ -1,0 +1,390 @@
+/* src/components/Register/Register.css */
+
+.register-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f8fafc;
+}
+
+/* Lado Izquierdo (Imagen/Propuesta de valor) */
+.register-left {
+  display: none; /* Oculto en móviles */
+  flex: 1;
+  background: linear-gradient(135deg, rgba(2, 6, 23, 0.8), rgba(15, 23, 42, 0.9)),
+              url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=1000&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 60px;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .register-left {
+    display: flex;
+  }
+}
+
+.left-content h2 {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.left-content p {
+  font-size: 1.2rem;
+  color: #cbd5e1;
+}
+
+/* Lado Derecho (Formulario) */
+.register-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 480px;
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.brand-logo {
+  height: 40px;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.register-card h1 {
+  text-align: center;
+  color: #0f172a;
+  margin-bottom: 5px;
+  font-size: 1.8rem;
+}
+
+.subtitle {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+}
+
+/* Botón Google */
+.btn-google {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-google:hover {
+  background: #f1f5f9;
+}
+
+.note-text {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+
+/* Separador */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.divider span {
+  padding: 0 10px;
+}
+
+/* Selector de Rol */
+.role-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  background: #f1f5f9;
+  padding: 6px;
+  border-radius: 14px;
+}
+
+.role-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.role-btn.active {
+  background: white;
+  color: #0f172a;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Formulario */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Estructura para inputs lado a lado */
+.input-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.input-row .input-group {
+  flex: 1;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.input-group input:not([type="checkbox"]) {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #22c55e;
+}
+
+.error-text {
+  font-size: 0.8rem;
+  color: #ef4444;
+  margin-top: 4px;
+}
+
+/* Indicador de Contraseña estilo Switch */
+.password-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-password {
+  background: none;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: color 0.3s;
+}
+
+.toggle-password.off {
+  color: #94a3b8;
+}
+
+.toggle-password.on {
+  color: #22c55e;
+}
+
+/* Checklist de seguridad */
+.password-checklist {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.password-checklist span.valid {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+/* Términos y botón principal */
+.terms-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.terms-group input[type="checkbox"] {
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.btn-register {
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #22c55e;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 10px;
+}
+
+.btn-register:hover:not(:disabled) {
+  background: #16a34a;
+}
+
+.btn-register:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+.register-links {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.register-links a {
+  text-decoration: none;
+  color: #22c55e;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.register-links a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para la descripción dinámica del rol */
+.role-description {
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  transition: all 0.3s ease;
+}
+
+.role-description p {
+  margin: 0;
+  text-align: left;
+}
+
+.role-description strong {
+  font-weight: 700;
+}
+
+.role-description.arrendatario {
+  background-color: #f0f9ff;
+  border: 1px solid #bae6fd;
+  color: #0369a1;
+}
+
+.role-description.arrendador {
+  background-color: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #b45309;
+}
+
+/* Adaptativo: Si se reduce la pantalla, se apilan */
+@media (max-width: 480px) {
+  .input-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.register-form .select-custom {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+  background-color: white;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+  height: 47px; /* Altura idéntica al input date */
+}
+
+.register-form .select-custom:focus {
+  border-color: #22c55e;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.verification-success-icon {
+  font-size: 4rem;
+  margin: 20px 0 10px;
+  animation: bounce 2s infinite;
+}
+
+.alert-box-info {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  margin-top: 20px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 🌟 OPTIMIZACIÓN: Asegura simetría exacta para las fechas en el Onboarding */
+.register-form input[type="date"] {
+  height: 47px;
+  box-sizing: border-box;
+}

@@ -1,0 +1,30 @@
+# Infraestructura local del microservicio de Pagos (tier de datos, Decisión 5 / Multi-Tier)
+version: "3.8"
+services:
+  postgres-pagos:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: driveshare
+      POSTGRES_PASSWORD: driveshare
+      POSTGRES_DB: driveshare_pagos
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata_pagos:/var/lib/postgresql/data
+
+  redis-pagos:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"     # protocolo AMQP
+      - "15672:15672"   # panel de administración web
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+volumes:
+  pgdata_pagos:

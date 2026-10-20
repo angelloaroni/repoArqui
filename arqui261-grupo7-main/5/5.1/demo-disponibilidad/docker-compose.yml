@@ -1,0 +1,18 @@
+services:
+
+  auth-service:
+    build: ./auth-service
+    container_name: auth-service
+
+    ports:
+      - "3000:3000"
+
+    depends_on:
+      - fake-mail-service
+
+  fake-mail-service:
+    build: ./fake-mail-service
+    container_name: fake-mail-service
+
+    ports:
+      - "3001:3001"

@@ -1,0 +1,99 @@
+.edit-vehicle {
+  padding: 40px;
+
+  display: flex;
+
+  justify-content: center;
+}
+
+.edit-vehicle-card {
+  width: 100%;
+
+  max-width: 900px;
+
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 4px 15px
+    rgba(
+      0,
+      0,
+      0,
+      0.08
+    );
+}
+
+.edit-vehicle-card h1 {
+  text-align: center;
+
+  margin-bottom: 30px;
+}
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(
+        250px,
+        1fr
+      )
+    );
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.form-grid input {
+  padding: 12px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 10px;
+}
+
+textarea {
+  width: 100%;
+
+  min-height: 140px;
+
+  padding: 12px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 10px;
+
+  resize: vertical;
+
+  margin-bottom: 20px;
+}
+
+.save-btn {
+  width: 100%;
+
+  border: none;
+
+  background: #22c55e;
+
+  color: white;
+
+  padding: 14px;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background: #16a34a;
+}

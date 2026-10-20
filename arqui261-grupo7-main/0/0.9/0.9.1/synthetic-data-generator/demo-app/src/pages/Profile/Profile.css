@@ -1,0 +1,81 @@
+.profile-page{
+
+    display:flex;
+
+    background:#f4f6f9;
+
+    min-height:calc(100vh - 70px);
+
+}
+
+.profile-page main{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+    padding:40px;
+
+}
+
+.profile-card{
+
+    width:500px;
+
+    background:white;
+
+    border-radius:14px;
+
+    padding:35px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.avatar{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:36px;
+
+    margin:auto;
+
+    margin-bottom:20px;
+
+}
+
+.profile-card h2{
+
+    text-align:center;
+
+}
+
+.profile-card p{
+
+    margin:12px 0;
+
+}
+
+.profile-card hr{
+
+    margin:25px 0;
+
+}

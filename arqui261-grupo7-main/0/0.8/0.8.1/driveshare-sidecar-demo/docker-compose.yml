@@ -1,0 +1,60 @@
+services:
+
+  postgres:
+    image: postgres:16
+
+    container_name: driveshare-postgres
+
+    environment:
+      POSTGRES_DB: driveshare
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+
+    ports:
+      - "5434:5432"
+
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  audit-sidecar:
+    build:
+      context: ./audit-sidecar
+
+    container_name: audit-sidecar
+
+    ports:
+      - "4000:4000"
+
+    depends_on:
+      - postgres
+
+    environment:
+      PORT: 4000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: driveshare
+      DB_USER: admin
+      DB_PASSWORD: admin123
+
+  user-service:
+    build:
+      context: ./user-service
+
+    container_name: user-service
+
+    ports:
+      - "3000:3000"
+
+    depends_on:
+      - postgres
+      - audit-sidecar
+
+    environment:
+      PORT: 3000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: driveshare
+      DB_USER: admin
+      DB_PASSWORD: admin123
+
+      AUDIT_SERVICE_URL: http://audit-sidecar:4000

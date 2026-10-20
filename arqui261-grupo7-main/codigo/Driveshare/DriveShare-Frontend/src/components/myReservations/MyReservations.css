@@ -1,0 +1,132 @@
+.review-section {
+  margin-top: 20px;
+
+  padding-top: 15px;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+.review-card {
+  background: #f8fafc;
+
+  padding: 12px;
+
+  margin-top: 10px;
+
+  border-radius: 10px;
+}
+
+.review-card h4 {
+  margin-bottom: 8px;
+}
+
+.review-actions {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 10px;
+}
+
+.review-btn,
+.edit-review-btn,
+.delete-review-btn,
+.edit-reservation-btn,
+.cancel-reservation-btn,
+.close-reservation-btn {
+  border: none;
+
+  padding: 8px 12px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+.review-btn {
+  background: #22c55e;
+  color: white;
+}
+
+.edit-review-btn,
+.edit-reservation-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+.delete-review-btn,
+.cancel-reservation-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.close-reservation-btn {
+  background: #0f766e;
+  color: white;
+}
+
+.reservation-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.edit-reservation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.edit-reservation-form input {
+  padding: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+}
+
+.reservation-error {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.review-hint {
+  margin-top: 12px;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.confirmed {
+  color: #16a34a;
+  font-weight: bold;
+}
+
+.pending {
+  color: #ca8a04;
+  font-weight: bold;
+}
+
+.finished {
+  color: #2563eb;
+  font-weight: bold;
+}
+
+.rejected {
+  color: #9333ea;
+  font-weight: bold;
+}
+
+.cancelled {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+.review-rating {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}

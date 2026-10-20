@@ -1,0 +1,94 @@
+services:
+
+  postgres:
+
+    image: postgres:16
+
+    container_name: synthetic-postgres
+
+    restart: always
+
+    environment:
+      POSTGRES_DB: synthetic_generator
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+
+    ports:
+      - "5438:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+
+    image: dpage/pgadmin4
+
+    container_name: synthetic-pgadmin
+
+    restart: always
+
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@synthetic.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+
+    ports:
+      - "5058:80"
+
+    depends_on:
+      - postgres
+
+  backend:
+
+    build: ./backend
+
+    container_name: synthetic-backend
+
+    restart: always
+
+    ports:
+      - "3200:3200"
+
+    env_file:
+      - ./backend/.env
+
+    volumes:
+      - ./backend/generated-files:/app/generated-files
+
+    depends_on:
+      - postgres
+
+  frontend:
+
+    build: ./frontend
+
+    container_name: synthetic-frontend
+
+    restart: always
+
+    ports:
+      - "5173:5173"
+
+    depends_on:
+      - backend
+
+  demo-app:
+
+    build: ./demo-app
+
+    container_name: synthetic-demo
+
+    restart: always
+
+    ports:
+      - "5174:5174"
+
+    volumes:
+      - ./demo-app:/app
+      - /app/node_modules
+
+    depends_on:
+      - backend
+
+volumes:
+
+  postgres_data:

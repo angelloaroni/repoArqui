@@ -1,0 +1,59 @@
+.user-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.user-table th{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:14px;
+
+}
+
+.user-table td{
+
+    padding:14px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.user-table tr:hover{
+
+    background:#f5f7fb;
+
+}
+
+.view-btn{
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    padding:8px 14px;
+
+    border-radius:6px;
+
+}
+
+.view-btn:hover{
+
+    background:#1d4ed8;
+
+}

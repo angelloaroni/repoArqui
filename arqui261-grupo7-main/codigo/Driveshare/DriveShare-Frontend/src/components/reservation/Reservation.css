@@ -1,0 +1,122 @@
+.reservation {
+  padding: 40px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.reservation-card {
+  width: 100%;
+  max-width: 700px;
+
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 4px 15px
+    rgba(
+      0,
+      0,
+      0,
+      0.08
+    );
+}
+
+.reservation-card h1 {
+  margin-bottom: 30px;
+
+  text-align: center;
+}
+
+.reservation-form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+
+  color: #334155;
+}
+
+.form-group input {
+  padding: 12px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 10px;
+
+  font-size: 14px;
+}
+
+.reservation-btn {
+  margin-top: 10px;
+
+  border: none;
+
+  background: #22c55e;
+
+  color: white;
+
+  padding: 14px;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.reservation-btn:hover {
+  background: #16a34a;
+}
+
+.vehicle-summary {
+  background: #f8fafc;
+
+  padding: 20px;
+
+  border-radius: 12px;
+
+  margin-bottom: 25px;
+}
+
+.vehicle-summary h3 {
+  margin-bottom: 10px;
+}
+
+.reservation-total {
+  background: #f1f5f9;
+
+  padding: 15px;
+
+  border-radius: 10px;
+
+  margin-top: 10px;
+
+  font-weight: 600;
+}
+
+.reservation-error {
+  color: #b91c1c;
+  font-weight: 600;
+  margin: 0;
+}

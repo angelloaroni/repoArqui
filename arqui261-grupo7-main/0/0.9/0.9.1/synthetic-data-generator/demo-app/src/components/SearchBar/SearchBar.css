@@ -1,0 +1,17 @@
+.search-bar{
+
+    width:100%;
+
+    padding:14px 18px;
+
+    margin:20px 0;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    font-size:15px;
+
+    background:white;
+
+}
