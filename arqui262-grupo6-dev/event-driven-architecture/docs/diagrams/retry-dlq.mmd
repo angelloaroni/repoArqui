@@ -1,0 +1,3 @@
+flowchart LR
+  M[cola principal] -->|fallo transitorio| P[republica x-attempt+1 y ACK] --> R[cola retry TTL] -->|expira via travel.dlx| M
+  M -->|intentos agotados| X{{travel.dlx}} --> Q[DLQ]

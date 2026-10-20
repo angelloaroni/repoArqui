@@ -1,0 +1,13 @@
+sequenceDiagram
+  participant B as Booking API
+  participant DB as Postgres
+  participant R as Outbox Relay
+  participant MQ as RabbitMQ
+  participant C as Consumers
+  B->>DB: UPDATE booking + INSERT outbox (1 transacción)
+  R->>DB: lee filas sin publicar
+  R->>MQ: publish + confirm
+  R->>DB: published_at
+  MQ->>C: entrega
+  C->>DB: event_id + efecto (1 transacción)
+  C->>MQ: ACK

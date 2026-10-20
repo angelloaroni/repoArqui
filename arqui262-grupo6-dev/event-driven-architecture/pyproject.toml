@@ -1,0 +1,31 @@
+# Tooling config only. Runtime dependencies live in shared/pyproject.toml.
+[tool.pytest.ini_options]
+addopts = "--import-mode=importlib"
+pythonpath = [
+  "shared/src",
+  "services/booking_service/src",
+  "services/crm_service/src",
+  "services/notification_service/src",
+  "services/analytics_service/src",
+  "services/outbox_relay/src",
+]
+testpaths = ["services", "tests"]
+markers = ["integration: needs the docker compose stack running (auto-skipped otherwise)"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+src = [
+  "shared/src",
+  "services/booking_service/src",
+  "services/crm_service/src",
+  "services/notification_service/src",
+  "services/analytics_service/src",
+  "services/outbox_relay/src",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Header", "fastapi.Query"]

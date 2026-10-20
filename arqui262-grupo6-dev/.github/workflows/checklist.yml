@@ -1,0 +1,23 @@
+# Checklist del informe: comenta en el PR dev → main el estado de llenado de cada
+# sección (● con texto · ◐ poco texto · ○ vacía). No es una calificación.
+# Mantenido por el docente: los cambios a .github/ requieren su aprobación
+# (CODEOWNERS). pull_request_target corre la versión de la rama por defecto (dev).
+name: Checklist del informe
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+# Una cola por rama de origen: un PR desde otra rama no desplaza la corrida de dev.
+concurrency:
+  group: checklist-${{ github.head_ref || github.ref }}
+  cancel-in-progress: false
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  checklist:
+    if: github.event_name == 'workflow_dispatch' || github.head_ref == 'dev'
+    uses: ulima-arqsoft/monografia-ci/.github/workflows/checklist.yml@main
+    with:
+      ref: ${{ github.event.pull_request.head.sha || github.sha }}

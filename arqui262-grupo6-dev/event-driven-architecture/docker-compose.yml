@@ -1,0 +1,101 @@
+# Run from this folder: docker compose up -d --build
+name: eda-demo
+
+x-app-env: &app-env
+  DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-eda}:${POSTGRES_PASSWORD:-eda}@postgres:5432/${POSTGRES_DB:-eda}
+  RABBITMQ_URL: amqp://${RABBITMQ_DEFAULT_USER:-eda}:${RABBITMQ_DEFAULT_PASS:-eda}@rabbitmq:5672/
+  DEMO_MODE: ${DEMO_MODE:-true}
+  MAX_RETRIES: ${MAX_RETRIES:-3}
+  RETRY_DELAY_MS: ${RETRY_DELAY_MS:-2000}
+
+x-app-health: &app-health
+  test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://localhost:8000/health', timeout=2)"]
+  interval: 5s
+  timeout: 3s
+  retries: 20
+  start_period: 10s
+
+x-app-deps: &app-deps
+  postgres: { condition: service_healthy }
+  rabbitmq: { condition: service_healthy }
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-eda}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-eda}
+      POSTGRES_DB: ${POSTGRES_DB:-eda}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-eda} -d ${POSTGRES_DB:-eda}"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  rabbitmq:
+    image: rabbitmq:4.0-management
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-eda}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-eda}
+    ports:
+      - "5672:5672"     # AMQP
+      - "15672:15672"   # Management UI
+    volumes:
+      - rabbitdata:/var/lib/rabbitmq
+      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/conf.d/90-demo.conf:ro
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 5s
+      timeout: 10s
+      retries: 20
+      start_period: 15s
+
+  booking-api:
+    build: { context: ., dockerfile: services/booking_service/Dockerfile }
+    environment: *app-env
+    depends_on: *app-deps
+    ports: ["8000:8000"]
+    healthcheck: *app-health
+    restart: unless-stopped
+
+  outbox-relay:
+    build: { context: ., dockerfile: services/outbox_relay/Dockerfile }
+    environment: *app-env
+    depends_on: *app-deps
+    ports: ["127.0.0.1:8004:8000"]   # status/timeline only, for demo scripts
+    healthcheck: *app-health
+    restart: unless-stopped
+
+  # Consumers expose a small HTTP status port bound to localhost so host scripts can
+  # read state and arm failures without a DB driver. restart policy is REQUIRED for
+  # the crash-before-ACK demo: Docker brings the crashed consumer back.
+  crm-consumer:
+    build: { context: ., dockerfile: services/crm_service/Dockerfile }
+    environment: *app-env
+    depends_on: *app-deps
+    ports: ["127.0.0.1:8001:8000"]
+    healthcheck: *app-health
+    restart: unless-stopped
+
+  notification-consumer:
+    build: { context: ., dockerfile: services/notification_service/Dockerfile }
+    environment: *app-env
+    depends_on: *app-deps
+    ports: ["127.0.0.1:8002:8000"]
+    healthcheck: *app-health
+    restart: unless-stopped
+
+  analytics-consumer:
+    build: { context: ., dockerfile: services/analytics_service/Dockerfile }
+    environment: *app-env
+    depends_on: *app-deps
+    ports: ["127.0.0.1:8003:8000"]
+    healthcheck: *app-health
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  rabbitdata:

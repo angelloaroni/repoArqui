@@ -1,0 +1,140 @@
+asyncapi: 3.0.0
+info:
+  title: Travel Events (EDA demo)
+  version: 1.0.0
+  description: >
+    Contract of the BookingConfirmed event. The Booking Service (through its outbox relay) is the
+    only producer; CRM, Notification and Analytics each consume it from their own queue.
+    Delivery is at-least-once: consumers must be idempotent on the CloudEvents `id`.
+
+servers:
+  rabbitmq:
+    host: localhost:5672
+    protocol: amqp
+    description: Local demo broker (credentials in .env.example, not for production)
+
+defaultContentType: application/json
+
+channels:
+  bookingConfirmed:
+    address: booking.confirmed.v1
+    description: >
+      Routing key on the durable topic exchange `travel.events`. Each subscriber binds its own durable
+      queue (crm.booking-confirmed.v1, notification.booking-confirmed.v1, analytics.booking-confirmed.v1).
+    servers:
+      - $ref: '#/servers/rabbitmq'
+    messages:
+      BookingConfirmed:
+        $ref: '#/components/messages/BookingConfirmed'
+    bindings:
+      amqp:
+        is: routingKey
+        exchange:
+          name: travel.events
+          type: topic
+          durable: true
+          autoDelete: false
+          vhost: /
+
+operations:
+  publishBookingConfirmed:
+    action: send
+    summary: Booking Service publishes BookingConfirmed (via the transactional outbox relay)
+    channel:
+      $ref: '#/channels/bookingConfirmed'
+    messages:
+      - $ref: '#/channels/bookingConfirmed/messages/BookingConfirmed'
+  crmReceiveBookingConfirmed:
+    action: receive
+    summary: CRM consumer (queue crm.booking-confirmed.v1, retry then DLQ crm.booking-confirmed.dlq)
+    channel:
+      $ref: '#/channels/bookingConfirmed'
+    messages:
+      - $ref: '#/channels/bookingConfirmed/messages/BookingConfirmed'
+  notificationReceiveBookingConfirmed:
+    action: receive
+    summary: Notification consumer (queue notification.booking-confirmed.v1)
+    channel:
+      $ref: '#/channels/bookingConfirmed'
+    messages:
+      - $ref: '#/channels/bookingConfirmed/messages/BookingConfirmed'
+  analyticsReceiveBookingConfirmed:
+    action: receive
+    summary: Analytics consumer (queue analytics.booking-confirmed.v1)
+    channel:
+      $ref: '#/channels/bookingConfirmed'
+    messages:
+      - $ref: '#/channels/bookingConfirmed/messages/BookingConfirmed'
+
+components:
+  messages:
+    BookingConfirmed:
+      name: BookingConfirmed
+      title: Booking confirmed
+      summary: A booking moved from PENDING to CONFIRMED.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/BookingConfirmedEnvelope'
+      examples:
+        - payload:
+            specversion: '1.0'
+            id: 3f0b8f6e-7c2d-4d0e-9f5e-1d1b2c3a4e5f
+            source: /booking-service
+            type: com.arquisoft.travel.booking.confirmed.v1
+            subject: booking/BK-1001
+            time: '2026-10-01T15:04:05Z'
+            datacontenttype: application/json
+            correlationid: corr-782
+            data:
+              booking_id: BK-1001
+              customer_id: C-100
+              amount: 450.0
+              currency: USD
+
+  schemas:
+    BookingConfirmedEnvelope:
+      type: object
+      required: [specversion, id, source, type, subject, time, datacontenttype, correlationid, data]
+      properties:
+        specversion:
+          type: string
+          const: '1.0'
+        id:
+          type: string
+          format: uuid
+          description: Unique per event. Consumers deduplicate on this value.
+        source:
+          type: string
+          const: /booking-service
+        type:
+          type: string
+          const: com.arquisoft.travel.booking.confirmed.v1
+        subject:
+          type: string
+          examples: [booking/BK-1001]
+        time:
+          type: string
+          format: date-time
+        datacontenttype:
+          type: string
+          const: application/json
+        correlationid:
+          type: string
+          description: Demo extension attribute. Same value in every log line of one flow.
+        data:
+          $ref: '#/components/schemas/BookingConfirmedData'
+    BookingConfirmedData:
+      type: object
+      required: [booking_id, customer_id, amount, currency]
+      properties:
+        booking_id:
+          type: string
+        customer_id:
+          type: string
+        amount:
+          type: number
+          description: >
+            The envelope allows any number; the CRM rejects amount <= 0 as a business rule
+            (this is the poison event used by the DLQ demo).
+        currency:
+          type: string
